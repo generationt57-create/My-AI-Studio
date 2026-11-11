@@ -1,0 +1,6 @@
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_001_150.mp3'
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_002_150.mp3'
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_003_150.mp3'
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_004_150.mp3'
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_005_150.mp3'
+file '/workspaces/My-AI-Studio/uploads/projects/proj_mwbdhnqc/narration_segments/seg_006_150.mp3'

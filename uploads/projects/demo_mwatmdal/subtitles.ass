@@ -1,0 +1,16 @@
+[Script Info]
+Title: Burmese Movie Recap Subtitles
+ScriptType: v4.00+
+PlayResX: 1280
+PlayResY: 720
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Default,Noto Sans Myanmar,27,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,1,0,0,0,100,100,0,0,3,6,0,2,60,60,72,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.50,0:00:05.61,Default,,0,0,0,,ဇာတ်လမ်း အစပိုင်းတွင် အဓိက ဇာတ်ကောင်များသည် မမျှော်လင့်ထားသော\Nအခြေအနေတစ်ခုနှင့် စတင် ရင်ဆိုင်ကြုံတွေ့ရပါသည်။
+Dialogue: 0,0:00:05.84,0:00:12.10,Default,,0,0,0,,ကာလကြာရှည် ခွဲခွာခဲ့ရပြီးနောက် သူတို့သည် ပြန်လည် ဆုံတွေ့ခဲ့ကြပြီး\Nကြီးမားသော စိန်ခေါ်မှုကို အတူတကွ ဖြေရှင်းရန် ဆုံးဖြတ်ခဲ့ကြသည်။
+Dialogue: 0,0:00:12.34,0:00:17.79,Default,,0,0,0,,နောက်ဆုံးတွင် သူတို့၏ ကြိုးစားအားထုတ်မှုနှင့် ရဲစွမ်းသတ္တိတို့ကြောင့်\Nအခက်အခဲအားလုံးကို အောင်မြင်စွာ ကျော်လွှားနိုင်ခဲ့ပါသည်။

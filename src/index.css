@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+/* A Ka 07 Myanmar Bold Font */
+@font-face {
+  font-family: "Aka07Myanmar";
+  src: url("/fonts/Aka07-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* Use Aka07 for bold Myanmar text */
+html[lang="my"] strong,
+html[lang="my"] b,
+html[lang="my"] h1,
+html[lang="my"] h2,
+html[lang="my"] h3 {
+  font-family: "Aka07Myanmar", sans-serif;
+  font-weight: 700;
+}
