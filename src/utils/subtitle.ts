@@ -121,7 +121,7 @@ export function formatAssTimestamp(seconds: number): string {
 
 /**
  * Generate standard Advanced SubStation Alpha (ASS) file format with precise positioning,
- * Myanmar Unicode font (Noto Sans Myanmar), responsive sizing, and compact background box.
+ * bold A ka 07 Myanmar font, responsive sizing, and outlined text.
  */
 export function generateAssContent(
   cues: SubtitleCue[],
@@ -135,14 +135,10 @@ export function generateAssContent(
     ? Math.max(28, Math.round(videoHeight * 0.024))
     : Math.max(20, Math.round(videoHeight * 0.038));
 
-  // MarginV from bottom: 23% for portrait (matching lower-center original Chinese subtitle position),
-  // 10% for landscape video.
-  const marginV = isPortrait
-    ? Math.round(videoHeight * 0.23)
-    : Math.round(videoHeight * 0.10);
+  // Keep subtitles near the bottom while leaving room for video controls and framing.
+  const marginV = Math.round(videoHeight * 0.10);
 
-  // BorderStyle 3 = semi-transparent compact background box; Outline = box padding
-  const boxPadding = isPortrait ? 10 : 6;
+  const outline = isPortrait ? 3 : 2;
   const marginLR = isPortrait ? 40 : 60;
 
   const header = `[Script Info]
@@ -154,7 +150,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Default,Noto Sans Myanmar,${fontSize},&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,1,0,0,0,100,100,0,0,3,${boxPadding},0,2,${marginLR},${marginLR},${marginV},1
+Style: Default,A ka 07,${fontSize},&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1,0,0,0,100,100,0,0,1,${outline},0,2,${marginLR},${marginLR},${marginV},1
 
 [Events]
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text

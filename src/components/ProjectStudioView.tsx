@@ -646,7 +646,7 @@ export const ProjectStudioView: React.FC<ProjectStudioViewProps> = ({
                 </p>
                 <p className="text-[11px] text-slate-400">
                   {isCompleted
-                    ? 'မြန်မာအသံထွက်နှင့် မြန်မာစာတန်းများကို Noto Sans Myanmar ဖောင့်ဖြင့် ထည့်သွင်းထားပါသည်'
+                    ? 'မြန်မာအသံထွက်နှင့် A ka 07 ဖောင့်ဖြင့် မြန်မာစာတန်းများကို ထည့်သွင်းထားပါသည်'
                     : 'လုပ်ငန်းစဉ်များ ဆောင်ရွက်ပြီးပါက ဤနေရာတွင် အပြီးသတ် ဗီဒီယိုကို ကြည့်ရှုနိုင်ပါမည်'}
                 </p>
               </div>

@@ -599,7 +599,7 @@ export const CreateRecapView: React.FC<CreateRecapViewProps> = ({
                 ဗီဒီယိုထဲသို့ မြန်မာစာတန်းများ တိုက်ရိုက်ထိုးမည် (Burn-in Subtitles)
               </p>
               <p className="text-xs text-slate-400">
-                Noto Sans Myanmar ဖောင့်ဖြင့် အနားသတ်လိုင်းပါသော ကြည်လင်ပြတ်သားသည့် မြန်မာစာတန်းများကို ဗီဒီယိုတွင် ထည့်သွင်းပေးမည်။
+                A ka 07 ဖောင့်ဖြင့် အနက်ရောင်အနားသတ်ပါသော မြန်မာစာတန်းများကို ဗီဒီယိုတွင် ထည့်သွင်းပေးမည် (ဖောင့်မရရှိပါက Noto Sans Myanmar ကို အသုံးပြုမည်)။
               </p>
             </div>
             <label className="relative inline-flex items-center cursor-pointer">

@@ -2,9 +2,20 @@ import { execFile, spawn } from 'child_process';
 import util from 'util';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
 const execFileAsync = util.promisify(execFile);
 const MAX_FFPROBE_BUFFER = 10 * 1024 * 1024;
+const APP_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const SUBTITLE_FONTS_DIR = path.join(APP_ROOT, 'public', 'fonts');
+const SUBTITLE_FONT_PATH = path.join(SUBTITLE_FONTS_DIR, 'Aka07-Bold.ttf');
+
+function escapeFFmpegFilterPath(value: string): string {
+  return value
+    .replace(/\\/g, '/')
+    .replace(/:/g, '\\:')
+    .replace(/'/g, "\\'");
+}
 
 /** Run FFmpeg without buffering its potentially large output streams. */
 export function runFFmpeg(args: string[]): Promise<void> {
@@ -195,7 +206,7 @@ export async function splitAudioFile(
 }
 
 /**
- * Combine video, Burmese narration audio, and Burmese subtitles with Noto Sans Myanmar font
+ * Combine video, Burmese narration audio, and Burmese subtitles with the custom Myanmar font
  */
 export async function renderFinalRecap(params: {
   videoPath: string;
@@ -214,12 +225,18 @@ export async function renderFinalRecap(params: {
     burnSubtitles = true,
   } = params;
 
+  const subtitleSrtPath = burnSubtitles && srtPath && fs.existsSync(srtPath) ? srtPath : undefined;
+  if (subtitleSrtPath && !fs.existsSync(SUBTITLE_FONT_PATH)) {
+    throw new Error(
+      `Subtitle font not found: ${SUBTITLE_FONT_PATH}. Ensure public/fonts/Aka07-Bold.ttf is included in the deployment.`
+    );
+  }
+
   const outDir = path.dirname(outputPath);
   if (!fs.existsSync(outDir)) {
     fs.mkdirSync(outDir, { recursive: true });
   }
 
-  const hasSubtitles = burnSubtitles && srtPath && fs.existsSync(srtPath);
   const hasNarration = fs.existsSync(narrationAudioPath);
 
   const ffmpegArgs: string[] = ['-y', '-i', videoPath];
@@ -237,18 +254,19 @@ export async function renderFinalRecap(params: {
   const videoWidth = meta.width > 0 ? meta.width : 1080;
   const videoHeight = meta.height > 0 ? meta.height : 1920;
 
-  if (hasSubtitles) {
-    // Generate matching .ass file with lower-center positioning (23% from bottom for portrait, 10% for landscape)
+  if (subtitleSrtPath) {
+    // Generate matching .ass file with bottom-center positioning.
     const { parseSrtContent, generateAssContent } = await import('../src/utils/subtitle');
-    const srtContent = fs.readFileSync(srtPath, 'utf8');
+    const srtContent = fs.readFileSync(subtitleSrtPath, 'utf8');
     const cues = parseSrtContent(srtContent);
     const assContent = generateAssContent(cues, videoWidth, videoHeight);
     const assPath = path.join(outDir, 'subtitles.ass');
     fs.writeFileSync(assPath, assContent, 'utf8');
 
-    // Burn subtitles with ASS filter and Noto Sans Myanmar font
-    const escapedAss = assPath.replace(/\\/g, '/').replace(/:/g, '\\:').replace(/'/g, "\\'");
-    filterComplex += `[0:v]ass='${escapedAss}'[vout];`;
+    // Load the bundled font directly; libass/Fontconfig can fall back to Noto Sans Myanmar.
+    const escapedAss = escapeFFmpegFilterPath(assPath);
+    const escapedFontsDir = escapeFFmpegFilterPath(SUBTITLE_FONTS_DIR);
+    filterComplex += `[0:v]ass='${escapedAss}':fontsdir='${escapedFontsDir}'[vout];`;
     mapVideo = '[vout]';
   }
 

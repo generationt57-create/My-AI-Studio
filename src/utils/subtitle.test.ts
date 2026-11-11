@@ -80,9 +80,11 @@ test('generateAssContent generates valid ASS format with portrait lower-center p
   const portraitAss = generateAssContent(cues, 1080, 1920);
   assert.ok(portraitAss.includes('PlayResX: 1080'));
   assert.ok(portraitAss.includes('PlayResY: 1920'));
-  assert.ok(portraitAss.includes('Noto Sans Myanmar'));
-  // MarginV should be ~23% of 1920 = 442
-  assert.ok(portraitAss.includes(',442,1'));
+  assert.ok(portraitAss.includes('Style: Default,A ka 07,46,&H00FFFFFF,&H000000FF,&H00000000,&HA0000000,-1'));
+  assert.ok(portraitAss.includes(',1,3,0,2,40,40,'));
+  assert.ok(portraitAss.includes('ဒီနေ့ဇာတ်လမ်း'));
+  // MarginV should be 10% of 1920 = 192
+  assert.ok(portraitAss.includes(',192,1'));
   assert.ok(portraitAss.includes('Dialogue: 0,0:00:00.50,0:00:03.50,Default,,0,0,0,,'));
 
   // Landscape (1280x720)
@@ -91,4 +93,5 @@ test('generateAssContent generates valid ASS format with portrait lower-center p
   assert.ok(landscapeAss.includes('PlayResY: 720'));
   // MarginV should be ~10% of 720 = 72
   assert.ok(landscapeAss.includes(',72,1'));
+  assert.ok(landscapeAss.includes('Style: Default,A ka 07,27,'));
 });
